@@ -1,0 +1,89 @@
+<div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        {{ edit ? 'Update' : 'Add' }} Area Master
+      </h1>
+      <div class="create-box">
+      </div>
+    </section>
+    
+      
+    <section class="content">
+      <!-- Page body start -->
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <!-- Basic Form Inputs card start -->
+            <div class="card">
+              <div class="card-block">
+                <form>
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label>Area Name</label>
+                      <input type="text" class="form-control" placeholder="Type Area Name" [(ngModel)]="_name" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="col-sm-4">
+                      <label>State</label>
+                      <select class="form-control" [(ngModel)]="_state" [ngModelOptions]="{standalone: true}">
+                        <option value="" disabled>--select--</option>
+                        <ng-container *ngFor="let state of myLocation.list">
+                          <option value="{{state.state}}">{{state.state}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                    <div class="col-sm-4">
+                      <label>District</label>
+                      <select class="form-control" [(ngModel)]="_district" [ngModelOptions]="{standalone: true}" (change)="onchange()">
+                        <option value="" disabled>--select--</option>
+                          <ng-container *ngFor="let item of myLocation.list">
+                            <ng-container *ngIf="item.state === _state">
+                              <ng-container *ngFor="let district of item.districts">
+                                <option value="{{district}}">{{district}}</option>
+                              </ng-container>
+                            </ng-container>
+                          </ng-container>  
+                      </select>    
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-4">
+                      <label>City</label>
+                      <select class="form-control" [(ngModel)]="_city" [ngModelOptions]="{standalone: true}">
+                        <option value="" disabled>--select--</option>
+                          <ng-container *ngFor="let item of myLocation.list">
+                            <ng-container *ngIf="item.state === _state">
+                              <ng-container *ngFor="let district of item.districts">
+                                <option value="{{district}}">{{district}}</option>
+                              </ng-container>
+                            </ng-container>
+                          </ng-container>  
+                      </select>    
+                    </div>
+                    <div class="col-sm-4">
+                      <label>Prospect Sale (kg)</label>
+                      <input type="text" class="form-control" placeholder="Type Prospect Sale" [(ngModel)]="_prospectSale" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="col-sm-4">
+                      <label>Status</label>
+                      <select class="form-control" [(ngModel)]="_status" [ngModelOptions]="{standalone: true}">
+                        <option value="" disabled>--select--</option>
+                        <option value="Active">Active</option>
+                        <option value="Deactive">Deactive</option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer">
+                <div>
+                  <button class="btn btn-warning btn-sm" (click)="submit()">{{ edit ? 'Update' : 'Add' }} Area</button>&nbsp;
+                  <button class="btn btn-light btn-sm" routerLink="/area-master/list">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page body end -->
+    </section>  
+    </div>

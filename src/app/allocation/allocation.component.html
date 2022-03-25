@@ -1,0 +1,147 @@
+
+<div class="content-wrapper">
+    <section class="content-header">
+      <h1 class="text-warning">
+        Allocation
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box box-solid">
+        <div class="box-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label>Search By &nbsp;</label>
+                <label class="radio-inline"><input type="radio" name="optradio" checked>Employee Id</label>
+                <label class="radio-inline"><input type="radio" name="optradio">Employee Name</label>
+                <label class="radio-inline"><input type="radio" name="optradio">Employee Email</label>
+              </div>
+              <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText1">
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="radio-inline"><input type="radio" name="selection" value="single" checked>Single</label>
+                <label class="radio-inline"><input type="radio" name="selection" value="multiple">Multiple</label>
+              </div> 
+            </div>
+            <div class="col-lg-12">
+              <div class="table-responsive" style="height: 300px; overflow: scroll;">
+                <table class="align-middle mb-0 table table-borderless table-striped table-hover fm-table">
+                  <thead>
+                    <tr>
+                      <th class="text-center"></th>
+                      <th class="text-center">Employee Id</th>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let emp of employeeList | filter: searchText1;let i=index">
+                      <td class="text-center"><input type="checkbox" [(ngModel)]="emp.checked"></td>
+                      <td class="text-center">{{emp.userId}}</td>
+                      <td class="text-center">{{emp.name}}</td>
+                      <td class="text-center">{{emp.email}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#allocated" data-toggle="tab">Alloated Area</a></li>
+          <li><a href="#blackout" data-toggle="tab">Blackout Area</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="active tab-pane" id="allocated">
+            <div class="box box-solid">
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <label>Search By &nbsp;</label>
+                      <label class="radio-inline"><input type="radio" name="optradio_21" checked>Area</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                          <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText2">
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="table-responsive" style="height: 300px; overflow: scroll;">
+                      <table class="align-middle mb-0 table table-borderless table-striped table-hover fm-table">
+                        <thead>
+                          <tr>
+                            <th class="text-center"></th>
+                            <th class="text-center">Area Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let area of areaMasterListAllocated | filter : searchText2;let i=index">
+                            <td class="text-center"><input type="checkbox" [(ngModel)]="area.checked"></td>
+                            <td class="text-center">{{area.name}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  
+          </div>
+          <div class="tab-pane" id="blackout">
+            <div class="box box-solid">
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <label>Search By &nbsp;</label>
+                      <label class="radio-inline"><input type="radio" name="optradio_22" checked>Area</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                          <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText3">
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="table-responsive" style="height: 300px; overflow: scroll;">
+                      <table class="align-middle mb-0 table table-borderless table-striped table-hover fm-table">
+                        <thead>
+                          <tr>
+                            <th class="text-center"></th>
+                            <th class="text-center">Area Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let area of areaMasterListBlackout | filter : searchText3;let i=index">
+                            <td class="text-center"><input type="checkbox" [(ngModel)]="area.checked"></td>
+                            <td class="text-center">{{area.name}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  
+          </div>
+        </div>
+      </div> 
+      <div class="row">
+        <div class="col-lg-12">
+            <button type="button" (click)="assing()" class="btn btn-warning">Assign</button>
+        </div>
+      </div>
+    </section>  
+  </div>
+  
+  

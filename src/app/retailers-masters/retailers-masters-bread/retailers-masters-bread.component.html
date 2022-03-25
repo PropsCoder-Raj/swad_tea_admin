@@ -1,0 +1,233 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      {{ edit ? 'Update' : 'Add' }} Retailers Master
+    </h1>
+    <div class="create-box">
+    </div>
+  </section>
+
+
+  <section class="content">
+    <div class="page-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-block">
+              <form>
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label>Contact Person Name</label>
+                    <input type="text" class="form-control" placeholder="Type Contact Person Name" [(ngModel)]="contactPersonName" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Mobile No</label>
+                    <input type="text" class="form-control" placeholder="Type Mobile No" [(ngModel)]="mobileNo" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Email Id</label>
+                    <input type="email" class="form-control" placeholder="Type Email Id" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Whatsapp No</label>
+                    <input type="text" class="form-control" placeholder="Type Whatsapp No" [(ngModel)]="whatsappNo" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  
+                  
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label>Aadhar No</label>
+                    <input type="text" class="form-control" placeholder="Type Aadhar CARD" [(ngModel)]="aadharCard" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Gender</label>
+                    <select class="form-control" [(ngModel)]="gender" [ngModelOptions]="{standalone: true}">
+                      <option value="" disabled>--select--</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Birth Date</label>
+                    <input type="date" class="form-control" placeholder="Type BirthDate" [(ngModel)]="birthDate" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Anniversary Date</label>
+                    <input type="date" class="form-control" placeholder="Type Anniversary Date" [(ngModel)]="anniversaryDate" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label>State</label>
+                    <select class="form-control" [(ngModel)]="state" [ngModelOptions]="{standalone: true}">
+                      <option value="" disabled>--select--</option>
+                      <ng-container *ngFor="let state of myLocation.list">
+                        <option value="{{state.state}}">{{state.state}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <label>District</label>
+                    <select class="form-control" [(ngModel)]="district" [ngModelOptions]="{standalone: true}" (change)="onchangeSelect()">
+                      <option value="" disabled>--select--</option>
+                      <ng-container *ngFor="let item of myLocation.list">
+                        <ng-container *ngIf="item.state === state">
+                          <ng-container *ngFor="let district of item.districts">
+                            <option value="{{district}}">{{district}}</option>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Taluka</label>
+                    <select class="form-control" [(ngModel)]="taluka" [ngModelOptions]="{standalone: true}">
+                      <option value="" disabled>--select--</option>
+                      <ng-container *ngFor="let item of myLocation.subDist">
+                        <ng-container *ngIf="item.name === city">
+                          <ng-container *ngFor="let tahasil of item.tahasil">
+                            <option value="{{tahasil}}">{{tahasil}}</option>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <label>City</label>
+                    <select class="form-control" [(ngModel)]="city" [ngModelOptions]="{standalone: true}">
+                      <option value="" disabled>--select--</option>
+                      <ng-container *ngFor="let item of myLocation.list">
+                        <ng-container *ngIf="item.state === state">
+                          <ng-container *ngFor="let district of item.districts">
+                            <option value="{{district}}">{{district}}</option>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>Address</label>
+                    <textarea class="form-control" [(ngModel)]="address" [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Selfi</label>
+                    <input type="file" class="form-control" (change)="readURLSelfi($event);">
+                    <img id="blah_2"  *ngIf="selfi != undefined"  style="height: 180px; width: 180px;" src="{{baseURL}}/retrieve/{{selfiURL}}" onerror="this.onerror=null;this.src=`http://placehold.it/180`;" alt="your image" />
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Retailer Photo</label>
+                    <input type="file" class="form-control" (change)="readURLPhoto($event);">
+                    <img style="height: 180px; width: 180px;" id="blah_3"  *ngIf="photo != undefined" src="{{baseURL}}/retrieve/{{photoURL}}" onerror="this.onerror=null;this.src=`http://placehold.it/180`;" alt="your image" />
+                  </div>
+                  <!-- <div class="col-sm-6">
+                    <label>Reference Details</label>
+                    <textarea class="form-control" [(ngModel)]="referenceDetails" [ngModelOptions]="{standalone: true}"></textarea>
+                  </div> -->
+                </div> 
+                <hr>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>Firm Name</label>
+                    <input type="text" class="form-control" placeholder="Type Name" [(ngModel)]="firmName" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-6">
+                    <label>Document</label>
+                    <input type="file" class="form-control" (change)="readURLDoc($event);">
+                    <img style="height: 180px; width: 180px;" id="blah_1"  *ngIf="document != undefined" src="{{baseURL}}/retrieve/{{documentURL}}" onerror="this.onerror=null;this.src=`http://placehold.it/180`;" alt="your image" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  
+                  <div class="col-sm-3">
+                    <label>GSTIN No</label>
+                    <input type="text" class="form-control" placeholder="Type GSTIN No" [(ngModel)]="gstinNo" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>FSSAI LIC No</label>
+                    <input type="text" class="form-control" placeholder="Type FSSAI LIC No" [(ngModel)]="fssailicNo" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Account Manager</label>
+                    <select class="form-control" [(ngModel)]="accountManager" [ngModelOptions]="{standalone: true}">
+                      <option value="" disabled>--select--</option>
+                      <ng-container *ngFor="let item of employeeList">
+                        <option value="{{item._id}}">{{item.name}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Sr Account Manager</label>
+                    <select class="form-control" [(ngModel)]="srAccountManager" [ngModelOptions]="{standalone: true}">
+                      <option value="" disabled>--select--</option>
+                      <ng-container *ngFor="let item of employeeList">
+                        <option value="{{item._id}}">{{item.name}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label>Potential Sale in Kg</label>
+                    <input type="text" class="form-control" placeholder="Type Potential Sale in Kg" [(ngModel)]="potentialSale" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Target In Kg</label>
+                    <input type="text" class="form-control" placeholder="Type Target In Kg" [(ngModel)]="target" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <!-- <div class="col-sm-3">
+                    <label>Discount</label>
+                    <input type="number" class="form-control" placeholder="Type Discount" [(ngModel)]="discount" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  
+                  <div class="col-sm-3">
+                    <label>Incentive</label>
+                    <input type="text" class="form-control" placeholder="Type Incentive" [(ngModel)]="incentive" [ngModelOptions]="{standalone: true}">
+                  </div> -->
+                </div>
+                <hr>
+                <div class="form-group row">
+                  
+                  <div class="col-sm-4">
+                    <label>Login ID</label>
+                    <input type="text" class="form-control" placeholder="Type Login ID" [(ngModel)]="userId" [ngModelOptions]="{standalone: true}" readonly onfocus="this.removeAttribute('readonly');">
+                  </div>
+                  <div class="col-sm-4" *ngIf="!edit">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Type Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" readonly onfocus="this.removeAttribute('readonly');">
+                  </div>
+                  <div class="col-sm-4" *ngIf="edit && passwordS">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Type Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-4">
+                    <label>Status</label>
+                    <select class="form-control" [(ngModel)]="status" [ngModelOptions]="{standalone: true}">
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                    </select>
+                  </div>
+                </div>
+                
+              </form>
+            </div>
+            <div class="card-footer">
+              <div>
+                <button class="btn btn-warning btn-sm"
+                  (click)="submit()">{{ edit ? 'Update' : 'Add' }} Retailers</button>&nbsp;
+                <button class="btn btn-light btn-sm" routerLink="/retailers-masters/list">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+

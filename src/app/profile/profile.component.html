@@ -1,0 +1,41 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Profile
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="col-lg-6">
+        <div class="flex-item-1">
+
+          <!-- Profile Image -->
+          <div class="box box-warning">
+            <div class="box-body box-profile">
+              <img class="profile-user-img img-responsive img-circle" style="height:150px;width:200px" src="assets/img/logo.jpeg" alt="User profile picture">
+
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Name</b> <a class="pull-right">{{name}}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Email</b> <a class="pull-right">{{authService.currentUserValue.email}}</a>
+                </li>
+              </ul>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+  </div>

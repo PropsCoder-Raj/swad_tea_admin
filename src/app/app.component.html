@@ -1,0 +1,7 @@
+
+<div class="wrapper" style="background-color: unset !important;">
+  <app-app-header *ngIf="isLogin" id="header"></app-app-header>
+  <app-app-menu *ngIf="isLogin" id="menu"></app-app-menu>
+  <router-outlet></router-outlet>
+  <app-app-footer *ngIf="isLogin" id="footer"></app-app-footer>
+</div>

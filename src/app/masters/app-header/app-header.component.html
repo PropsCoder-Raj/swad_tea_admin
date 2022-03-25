@@ -1,0 +1,57 @@
+<header class="main-header">
+    
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle text-dark " data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <div class="small-box hidden-xs" style="float: left;margin: 5px 5px; width: 200px; background-color: #9abc3f; color: white; border-radius: 10px;">
+        <div class="inner">
+          <span style="font-size:17px;">Total Employee</span>
+          <span style="float: right;font-size: 20px; font-weight: bold;">{{totalEmp}}</span>
+        </div>
+      </div>
+      <div class="small-box hidden-xs" style="float: left;margin: 5px 5px; width: 200px; background-color: #ffbc2c; color: white; border-radius: 10px;">
+        <div class="inner">
+          <span style="font-size:17px;">New Enrollenment</span>
+          <span style="float: right;font-size: 20px; font-weight: bold;">{{newEnroll}}</span>
+
+         
+        </div>
+      </div>
+      <div class="small-box hidden-xs" style="float: left;margin: 5px 5px; width: 200px;background-color: #ee820e; color: white; border-radius: 10px;">
+        <div class="inner">
+          <span style="font-size:17px;">Total Retailers</span>
+          <span style="float: right;font-size: 20px; font-weight: bold;">{{totalRetials}}</span>
+
+         
+        </div>
+      </div>
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o text-dark"></i>
+              <span class="label label-danger">{{data.length}}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+
+                <ul class="menu">
+                  <li *ngFor="let item of data"><a href="#" style="white-space: normal; "><b>{{item.title}}</b><br> {{item.message}}</a></li>
+                  <li *ngIf="data.length == 0"><a href="#">No Notifications</a></li>
+                  <li *ngIf="data.length > 0"><a href="#" (click)="clearNotification()">CLEAR</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li> -->
+          <!-- User Account: style can be found in dropdown.less -->
+          <li>
+            <a class="btn btn-danger btn-flat" (click)="authS.logout()">Log Out</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+  </header>

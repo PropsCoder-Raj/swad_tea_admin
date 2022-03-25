@@ -1,0 +1,66 @@
+<div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        {{ edit ? 'Update' : 'Add' }} Policy Master
+      </h1>
+      <div class="create-box">
+      </div>
+    </section>
+    
+      
+    <section class="content">
+      <!-- Page body start -->
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <!-- Basic Form Inputs card start -->
+            <div class="card">
+              <div class="card-block">
+                <form>
+                  <div class="form-group row">
+                    <div class="col-sm-3">
+                      <label>Sales Team Incentive</label>
+                      <input type="number" class="form-control" placeholder="Type Sales Team Incentive" [(ngModel)]="salesTeamIncentive" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="col-sm-3">
+                      <label>Sales Team Target</label>
+                      <input type="number" class="form-control" placeholder="Type Sales Team Target" [(ngModel)]="salesTeamTarget" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="col-sm-3">
+                      <label>BirthDay offer Incentive</label>
+                      <input type="number" class="form-control" placeholder="Type BirthDay offer Incentive" [(ngModel)]="birthDayOfferIncentive" [ngModelOptions]="{standalone: true}">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-3">
+                      <label>Retailer Incentive</label>
+                      <input type="number" class="form-control" placeholder="Type Retailer Incentive" [(ngModel)]="retailerIncentive" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="col-sm-3">
+                      <label>Retailer Target</label>
+                      <input type="number" class="form-control" placeholder="Type Retailer Target" [(ngModel)]="retailerTarget" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="col-sm-3">
+                      <label>Retailer Free TEA (kg)</label>
+                      <input type="number" class="form-control" placeholder="Type Retailer Free TEA" [(ngModel)]="retailerFreeTEA" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="col-sm-3">
+                      <label>Retailer BirthDay offer Incentive</label>
+                      <input type="number" class="form-control" placeholder="Type Retailer BirthDay offer Incentive" [(ngModel)]="retailerBirthDayOfferIncentive" [ngModelOptions]="{standalone: true}">
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer">
+                <div>
+                  <button class="btn btn-warning btn-sm" (click)="submit()">{{ edit ? 'Update' : 'Add' }} Employee</button>&nbsp;
+                  <button class="btn btn-light btn-sm" routerLink="/policy-master/list">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page body end -->
+    </section>  
+    </div>

@@ -1,0 +1,304 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Orders
+    </h1>
+    <div class="create-box">
+      <!-- <button class="btn btn-warning btn-sm" (click)="refresh()"><i class="fa fa-refresh"></i></button>
+          <button class="btn btn-warning btn-sm" (click)="exportAsXLSX()"><i class="fa fa-download"></i></button>
+          <button class="btn btn-warning btn-sm" routerLink="/policy-master/activity/create">Add Policy</button> -->
+      <!-- <button type="button" class="btn btn-primary" #refresh (click)="getData()"><i class="fa fa-refresh"></i></button> -->
+    </div>
+  </section>
+
+  <section class="content">
+
+    <div class="box box-solid">
+      <div class="box-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div>
+              
+              <div>
+                <!-- Modal -->
+                <div class="modal bd-example-modal-lg fade" id="exampleModal" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-lg-3">                        
+                            <h5 style="font-weight: 400;font-size: 12px">Proforma Invoice No</h5>
+                            <h6 style="font-weight: bold;font-size: 14px">PNV-{{proformaInvoiceNo}}</h6>
+                          </div>
+                          <div class="col-lg-3">                        
+                            <h5 style="font-weight: 400;font-size: 12px">Order Id</h5>
+                            <h6 style="font-weight: bold;font-size: 14px">{{_id.substring(0, 10)}}</h6>
+                          </div>
+                          <div class="col-lg-3">                        
+                            <h5 style="font-weight: 400;font-size: 12px">Retailer</h5>
+                            <h6 style="font-weight: bold;font-size: 14px">{{firmName}}</h6>
+                          </div>
+                          <div class="col-lg-3">                        
+                            <h5 style="font-weight: 400;font-size: 12px">Employee</h5>
+                            <h6 style="font-weight: bold;font-size: 14px">{{employeeName}}</h6>
+                          </div>
+                          <div class="col-lg-12">
+                            <br>
+                          </div>
+                          <div class="col-lg-2">                        
+                            <h5 style="font-weight: 400;font-size: 12px">Transporter Name</h5>
+                            <h6 style="font-weight: bold;font-size: 14px">{{transport[0].transporterName}}</h6>
+                          </div>
+                          <div class="col-lg-2">                        
+                            <h5 style="font-weight: 400;font-size: 12px">GST/Transporter Id</h5>
+                            <h6 style="font-weight: bold;font-size: 14px">{{transport[0].gstTransporterId}}</h6>
+                          </div>
+                          <div class="col-lg-3">                        
+                            <h5 style="font-weight: 400;font-size: 12px">Contact Person Name</h5>
+                            <h6 style="font-weight: bold;font-size: 14px">{{transport[0].contactPersonName}}</h6>
+                          </div>
+                          <div class="col-lg-2">                        
+                            <h5 style="font-weight: 400;font-size: 12px">Mobile</h5>
+                            <h6 style="font-weight: bold;font-size: 14px">{{transport[0].mobile}}</h6>
+                          </div>
+                          <div class="col-lg-3">                        
+                            <h5 style="font-weight: 400;font-size: 12px">Address</h5>
+                            <h6 style="font-weight: bold;font-size: 14px">{{transport[0].address}}</h6>
+                          </div>
+                          
+                          <div class="col-lg-12">
+                            <div class="col-lg-12" style="margin-top: 30px;">
+                              <h5 style="margin-top: unset;font-weight: bold;">Items</h5>
+                              <div>
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                        
+                                        <th>Product Name</th>
+                                        <th>Size</th>
+                                        <th>Bags</th>
+                                        <th>Quantity</th>
+                                        <th>Total KG</th>
+                                        <th>Discount</th>
+                                        <th>KG/PKT</th>
+                                        <th>Rate</th>
+                                        <th>Total</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let item of items; let i = index">
+                                      
+                                      <th>{{item.productName}}</th>
+                                      <th>{{item.size}}</th>
+                                      <th>{{item.bag}}</th>
+                                      <th>{{item.quantity}}</th>
+                                      <th>{{item.totalkgpkt}}</th>
+                                      <th>{{item.discount}}</th>
+                                      <th>{{item.kgpkt}}</th>
+                                      <th>₹ {{item.rate}}</th>
+                                      <th>₹ {{item.amount}}</th>
+                                    </tr>
+                                    <tr *ngFor="let item of offersItems; let i = index" style="color:green;">
+                                      
+                                      <th>{{item.productName}}</th>
+                                      <th>{{item.size}}</th>
+                                      <th>{{item.bag}}</th>
+                                      <th>{{item.freeKg}}</th>
+                                      <th>{{item.totalKg}}</th>
+                                      <th>{{item.discount}}</th>
+                                      <th>{{item.kgpkt}}</th>
+                                      <th>₹ {{item.rate}}</th>
+                                      <th>₹ {{item.total}}</th>
+                                    </tr>
+
+
+                                    <tr>
+                                      
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th>Sub Total</th>
+                                      <th>₹ {{subTotal}}</th>
+                                    </tr>
+                                    <tr *ngIf="commission !== 0">
+                                      
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th>Commission</th>
+                                      <th> - ₹ {{commission}}</th>
+                                    </tr>
+                                    <tr>
+                                      
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th>CGST</th>
+                                      <th>+ ₹ {{cgst}}</th>
+                                    </tr>
+                                    <tr>
+                                      
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th>SGST</th>
+                                      <th>+ ₹ {{sgst}}</th>
+                                    </tr>
+                                    <tr>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th></th>
+                                      <th>Total</th>
+                                      <th>₹ {{totalAmount}}</th>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>  
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1" data-toggle="tab">{{'Proforma Invoice'}}</a></li>
+                <li><a href="#tab2" data-toggle="tab">{{'Invoice'}}</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="active tab-pane" id="tab1">
+                  <div class="col-lg-12" style="padding: 20px">
+                    <div class="table-responsive">
+                      <table class="table" #table1>
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Proforma Invoice No</th>
+                            <th>Order Id</th>
+                            <th>Retailer Name</th>
+                            <th>Employee Name</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Payment Status</th>
+                            <th>Status</th>
+                            <th style="width: 12%;">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of dataList; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>PNV-{{item.proformaInvoiceNo}}</td>
+                            <td>{{item._id.substring(0, 10)}}</td>
+                            <td>{{item.retailerData[0].firmName}}</td>
+                            <td>{{item.employeeData[0].name}}</td>
+                            <td>₹ {{item.totalAmount}}</td>
+                            <td>{{item.createdAt | date: 'dd-MM-yyyy'}}</td>
+                            <td>
+                              <span class="badge" style="text-transform: uppercase;background: #198754;" *ngIf="item.paymentStatus === 'success'">{{item.paymentStatus}}</span>
+                              <span class="badge" style="text-transform: uppercase;background: #dc3545;" *ngIf="item.paymentStatus !== 'success'">{{item.paymentStatus}}</span>
+                            </td>
+                            <td>
+                              <span class="badge" style="text-transform: uppercase;background: #198754;" *ngIf="item.status === 'success'">{{item.status}}</span>
+                              <span class="badge" style="text-transform: uppercase;background: #dc3545;" *ngIf="item.status !== 'success'">{{item.status}}</span>
+                            </td>
+                            <td>
+                              <button class="btn btn-primary btn-sm" (click)="procced(item._id)"> Proceed</button>
+                              <button class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#exampleModal" (click)="viewData(item)"> <i
+                                  class="fa fa-eye"></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab2">
+
+                  <div class="col-lg-12" style="padding: 20px">
+                    <div class="table-responsive">
+                      <div class="table-responsive">
+                        <table class="table" #table2>
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Invoice No</th>
+                              <th>Order Id</th>
+                              <th>Retailer Name</th>
+                              <th>Employee Name</th>
+                              <th>Amount</th>
+                              <th>Date</th>
+                              <th>Payment</th>
+                              <th>Status</th>
+                              <th style="width: 12%;">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of invoiceList; let i = index">
+                              <th scope="row">{{i+1}}</th>
+                              <td>INV-{{item.proformaInvoiceNo}}</td>
+                              <td>{{item._id.substring(0, 10)}}</td>
+                              <td>{{item.retailerData[0].firmName}}</td>
+                              <td>{{item.employeeData[0].name}}</td>
+                              <td>₹ {{item.totalAmount}}</td>
+                              <td>{{item.createdAt | date: 'dd-MM-yyyy'}}</td>
+                              <td>
+                                <span class="badge" style="text-transform: uppercase;background: #198754;" *ngIf="item.paymentStatus === 'success'">{{item.paymentStatus}}</span>
+                                <span class="badge" style="text-transform: uppercase;background: #dc3545;" *ngIf="item.paymentStatus !== 'success'">{{item.paymentStatus}}</span>
+                              </td>
+                              <td>
+                                <span class="badge" style="text-transform: uppercase;background: #198754;" *ngIf="item.status === 'success'">{{item.status}}</span>
+                                <span class="badge" style="text-transform: uppercase;background: #dc3545;" *ngIf="item.status !== 'success'">{{item.status}}</span>
+                              </td>
+                              <td>
+                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="viewData(item)"> <i
+                                    class="fa fa-eye"></i></button>     
+                              <a (click)="print(item._id)" class="btn btn-warning btn-sm"> <i class="fa fa-print"></i></a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

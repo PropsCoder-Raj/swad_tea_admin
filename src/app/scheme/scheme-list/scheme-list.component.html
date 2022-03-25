@@ -1,0 +1,103 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Scheme
+    </h1>
+    <div class="create-box">
+      <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Commission</button>
+      <button class="btn btn-warning btn-sm" (click)="refresh()"><i class="fa fa-refresh"></i></button>
+        <button class="btn btn-warning btn-sm" (click)="exportAsXLSX()"><i class="fa fa-download"></i></button>
+      <button class="btn btn-warning btn-sm" routerLink="/scheme/activity/create">Add Scheme</button>
+    </div>
+  </section>
+
+  <section class="content">
+
+    <div class="box box-solid">
+      <div class="box-body">
+        <div class="table-responsive">
+
+          <div class="table-responsive">
+            <table class="table" id="table" #table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Product Name</th>
+                  <th>Product Type</th>
+                  <th>Target</th>
+                  <th>Std Size</th>
+                  <th>Free</th>
+                  <th style="width: 10%;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of dataList; let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{item.productData[0].productCode}} - {{item.productData[0].productName}} - {{item.productData[0].size}}</td>
+                  <td>{{item.productType}}</td>
+                  <td>{{item.targetKg}} KG</td>
+                  <td>{{item.stdSize}}</td>
+                  <td>{{item.freeKg}} KG</td>
+                  <td>
+                    <button class="btn btn-warning btn-sm" (click)="updateData(item._id)"> <i
+                        class="fa fa-pencil"></i></button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteData(item._id)"> <i
+                        class="fa fa-trash"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<div class="modal bd-example-modal-lg fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Invoice Level Commission</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <label>Target</label>
+          <input type="text" class="form-control" placeholder="Type Target" [(ngModel)]="target" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="col-lg-6">
+          <label>Commission</label>
+          <input type="text" class="form-control" placeholder="Type Commission" [(ngModel)]="commission" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+      <hr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Target</th>
+            <th>Commission</th>
+            <th>Created On</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of commissionData">
+            <td>{{item.target}} KG</td>
+            <td>{{item.commission}}%</td>
+            <td>{{item.createdAt | date}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" id="close" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+    </div>
+  </div>
+</div>
+</div>

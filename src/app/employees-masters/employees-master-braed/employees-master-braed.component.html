@@ -1,0 +1,229 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      {{ edit ? 'Update' : 'Add' }} Employee
+    </h1>
+    <div class="create-box">
+    </div>
+  </section>
+  
+    
+  <section class="content">
+    <!-- Page body start -->
+    <div class="page-body">
+      <div class="row">
+        <div class="col-sm-12 p-0" style="padding: 0px;">
+          <!-- Basic Form Inputs card start -->
+          <div class="card">
+            <div class="card-block">
+              <form autocomplete="chrome-off">
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label>Name</label>
+                    <input type="text" class="form-control" placeholder="Type Name" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Mobile No</label>
+                    <input type="text" class="form-control" placeholder="Type Mobile No" [(ngModel)]="mobileNo" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Email Id</label>
+                    <input type="email" class="form-control" placeholder="Type Email Id" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Aadhar No</label>
+                    <input type="text" class="form-control" placeholder="Type Aadhar CARD" [(ngModel)]="aadharCard" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label>Gender</label>
+                    <select class="form-control" [(ngModel)]="gender" [ngModelOptions]="{standalone: true}">
+                      <option value="" disabled>--select--</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Birth Date</label>
+                    <input type="date" class="form-control" placeholder="Type BirthDate" [(ngModel)]="birthDate" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Anniversary Date</label>
+                    <input type="date" class="form-control" placeholder="Type Anniversary Date" [(ngModel)]="anniversaryDate" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Photo</label>
+                    <input type="file" class="form-control" (change)="readURLPhoto($event);">
+                    <img style="height: 100px; width: 100px;" *ngIf="photo.url != ''" id="blah_2" src="{{baseURL}}/retrieve/{{photo.url}}" onerror="this.onerror=null;this.src=`http://placehold.it/180`;" alt="your image" />
+                  </div>
+                </div>
+                <hr>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <div class="row">
+                      <div class="col-sm-12 p-0" style="padding: 0px;">
+                        <label>State</label>
+                        <select class="form-control" [(ngModel)]="state" [ngModelOptions]="{standalone: true}">
+                            <option value="" disabled>--select--</option>
+                            <ng-container *ngFor="let state of myLocation.list">
+                              <option value="{{state.state}}">{{state.state}}</option>
+                            </ng-container>
+                        </select>
+                      </div>
+                      <div class="col-sm-12 p-0" style="padding: 0px;">
+                        <label>City</label>
+                        <select class="form-control" [(ngModel)]="city" [ngModelOptions]="{standalone: true}">
+                          <option value="" disabled>--select--</option>
+                              <ng-container *ngFor="let item of myLocation.list">
+                                <ng-container *ngIf="item.state === state">
+                                  <ng-container *ngFor="let district of item.districts">
+                                    <option value="{{district}}">{{district}}</option>
+                                  </ng-container>
+                                </ng-container>
+                              </ng-container>  
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="row">
+                      <div class="col-sm-12 p-0" style="padding: 0px;">
+                        <label>Address</label>
+                        <textarea class="form-control" rows="4" [(ngModel)]="address" [ngModelOptions]="{standalone: true}"></textarea>
+                      </div>    
+                    </div>
+                  </div>
+                  
+                </div>
+                <hr>
+                <div class="form-group row">
+                  <div class="col-sm-3">
+                    <label>Designation</label>
+                    <select class="form-control" [(ngModel)]="designation" [ngModelOptions]="{standalone: true}">
+                      <option value="" disabled>--select--</option>
+                      <ng-container *ngFor="let item of designationList">
+                        <option value="{{item._id}}">{{item.designation}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Area of Expertise</label>
+                    <input type="text" class="form-control" placeholder="Type Area of Expertise" [(ngModel)]="areaOfExpertise" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Date of Joning</label>
+                    <input type="date" class="form-control" placeholder="Type Date of Joning" [(ngModel)]="dateOfJoning" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Reporting To</label>
+                    <select class="form-control" [(ngModel)]="reportingTo" [ngModelOptions]="{standalone: true}">
+                      <option value="" disabled>--select--</option>
+                      <ng-container *ngFor="let item of employeeList">
+                        <option value="{{item.name}}">{{item.name}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  
+                  
+                  
+                  <div class="col-sm-3">
+                    <label>Target In Kg</label>
+                    <input type="text" class="form-control" placeholder="Type Target In Kg" [(ngModel)]="targetInKg" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Incentive</label>
+                    <input type="number" class="form-control" placeholder="Type Incentive %" [(ngModel)]="incentive" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Document</label>
+                    <input type="file" class="form-control" (change)="readURLDoc($event);">
+                  </div>
+                  <div class="col-sm-3">
+                    <img style="height: 100px; width: 100px;" *ngIf="document.url != ''" id="blah_1" src="{{baseURL}}/retrieve/{{document.url}}" onerror="this.onerror=null;this.src=`http://placehold.it/180`;" alt="your image" />
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <!-- <div class="col-sm-6"style="padding: 0px;">
+                    <div class="row">
+                      <div class="col-sm-6" >
+                        <label>Alloated Area</label>
+                        <div class="form-group">
+                          <select class="form-control" [(ngModel)]="alloatedArea" [ngModelOptions]="{standalone: true}" multiple>
+                            <ng-container *ngFor="let item of areaMasterListAllocated">
+                              <ng-container *ngIf="item.status == 'Active'">
+                                <option value="{{item.name}}">{{item.name}}</option>
+                              </ng-container>  
+                            </ng-container>
+                          </select>
+                        </div>  
+                      </div>
+                      <div class="col-sm-6 form-group" >
+                        <label>Blackout Area</label>
+                        <div class="form-group">
+                          
+                          <select class="form-control" [(ngModel)]="blackoutArea" [ngModelOptions]="{standalone: true}" multiple>
+                            <ng-container *ngFor="let item of areaMasterListBlackout">
+                              <ng-container *ngIf="item.status == 'Active'">
+                                <option value="{{item.name}}">{{item.name}}</option>
+                              </ng-container>  
+                            </ng-container>
+                          </select>
+                        </div>  
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="col-sm-6">
+                    <div class="row">
+                      <div class="col-sm-12 p-0" style="padding: 0px;">
+                        <label>Reference Details</label>
+                        <textarea class="form-control" rows="4" [(ngModel)]="referenceDetails" [ngModelOptions]="{standalone: true}"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+                </div>
+                <hr>
+                <div class="form-group row">
+                  
+                  <div class="col-sm-4">
+                    <label>Login ID</label>
+                    <input type="text" class="form-control" placeholder="Type Login ID" name="fakeusername" [(ngModel)]="userId" readonly onfocus="this.removeAttribute('readonly');" [ngModelOptions]="{standalone: true}" autocomplete="chrome-off">
+                  </div>
+                  <div class="col-sm-4" *ngIf="!edit">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Type Password" name="fakepassword" [(ngModel)]="password" readonly onfocus="this.removeAttribute('readonly');" [ngModelOptions]="{standalone: true}" autocomplete="chrome-off">
+                  </div>
+                  <div class="col-sm-4">
+                    <label>Status</label>
+                    <select class="form-control" [(ngModel)]="status" [ngModelOptions]="{standalone: true}">
+                      <option value="" disabled>--select--</option>
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                    </select>
+                  </div>  
+                </div>
+              </form>
+            </div>
+            <div class="card-footer">
+              <div>
+                <button class="btn btn-warning btn-sm" (click)="submit()">{{ edit ? 'Update' : 'Add' }} Employee</button>&nbsp;
+                <button class="btn btn-light btn-sm" routerLink="/employees-masters">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page body end -->
+  </section>  
+  </div>
+
+  <!-- <div class="col-sm-6">
+    <label>Remark</label>
+    <textarea class="form-control" [(ngModel)]="remark" [ngModelOptions]="{standalone: true}"></textarea>
+  </div> -->

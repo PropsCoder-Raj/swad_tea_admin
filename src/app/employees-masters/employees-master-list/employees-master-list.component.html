@@ -1,0 +1,67 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Employees Masters
+    </h1>
+    <div class="create-box">
+        <button class="btn btn-warning btn-sm" (click)="refresh()"><i class="fa fa-refresh"></i></button>
+        <button class="btn btn-warning btn-sm" (click)="exportAsXLSX()"><i class="fa fa-download"></i></button>
+        <button class="btn btn-warning btn-sm" routerLink="/employees-masters/create">Add Employee</button>
+      <!-- <button type="button" class="btn btn-primary" #refresh (click)="getData()"><i class="fa fa-refresh"></i></button> -->
+    </div>
+  </section>
+
+  <section class="content">
+
+    <div class="box box-solid">
+      <div class="box-body">
+        <div class="table-responsive">
+          <table class="table" id="employeesTable" #table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Mobile No</th>
+                <th>Email ID</th>
+                <th>Area of Expertise</th>
+                <th>Designation</th>
+                <th>Reporting To</th>
+                <th>Target</th>
+                <th>Login Id</th>
+                <th>Status</th>
+                <th style="width: 9%;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of dataList; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{item.name}}</td>
+                <td>{{item.mobileNo}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.areaOfExpertise}}</td>
+                <td>{{item._destination}}</td>
+                <td>{{item.reportingTo}}</td>
+                <td>{{item.targetInKg}} KG</td>
+                <td>{{item.userId}}</td>
+                <td>
+                    <label class="switch" *ngIf="item.status === 'Active'">
+                      <input type="checkbox" checked (click)="updateStatus(item._id, 'Deactive')">
+                      <span class="slider round"></span>
+                    </label>
+                    <label class="switch" *ngIf="item.status === 'Deactive'">
+                      <input type="checkbox" (click)="updateStatus(item._id, 'Active')">
+                      <span class="slider round"></span>
+                    </label>
+                </td>
+                <td>
+                  <button class="btn btn-warning btn-sm" (click)="updateData(item.empId)"> <i class="fa fa-pencil"></i></button>
+                  <!-- <button class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i></button> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

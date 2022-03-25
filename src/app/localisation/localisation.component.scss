@@ -1,0 +1,38 @@
+.table{
+    th, td{
+        font-size: small;
+    }
+}
+
+.head-content{
+    margin-bottom: 2vh;
+    .m-b-10{
+        color: #ffbc2c !important;
+    }
+}
+
+.btn{
+    margin-left: 10px;
+}
+
+.btn-sm{
+    font-weight: bold !important;
+    font-size: small !important;
+    i{
+        margin-right: unset !important;
+        font-weight: bold !important;
+        font-size: medium !important;
+    }
+}
+
+.md-tabs .nav-link{
+    font-weight: 400;
+}
+
+.md-tabs .nav-link.active{
+    color: #dfa97e !important;
+}   
+
+.slide{
+    background: #dfa97e !important;
+}

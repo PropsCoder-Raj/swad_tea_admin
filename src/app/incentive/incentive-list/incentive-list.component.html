@@ -1,0 +1,192 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Incentive
+    </h1>
+    <div class="create-box">
+      <button class="btn btn-warning btn-sm" (click)="refresh()"><i class="fa fa-refresh"></i></button>
+      <!-- <button type="button" class="btn btn-primary" #refresh (click)="getData()"><i class="fa fa-refresh"></i></button> -->
+    </div>
+  </section>
+
+  <section class="content">
+
+
+    <!-- Modal -->
+    <div class="modal bd-example-modal-lg fade" id="exampleModal" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Employee Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-3">
+                <h5 style="font-weight: 400;font-size: 12px">Name</h5>
+                <h6 style="font-weight: bold;font-size: 14px">{{name}}</h6>
+              </div>
+              <div class="col-lg-3">
+                <h5 style="font-weight: 400;font-size: 12px">Mobile No</h5>
+                <h6 style="font-weight: bold;font-size: 14px">{{mobileNo}}</h6>
+              </div>
+              <div class="col-lg-3">
+                <h5 style="font-weight: 400;font-size: 12px">Email</h5>
+                <h6 style="font-weight: bold;font-size: 14px">{{email}}</h6>
+              </div>
+              <div class="col-lg-3">
+                <h5 style="font-weight: 400;font-size: 12px">Area Of Expertise</h5>
+                <h6 style="font-weight: bold;font-size: 14px">{{areaOfExpertise}}</h6>
+              </div>
+              <div class="col-lg-12">
+                <br>
+              </div>
+              <div class="col-lg-3">
+                <h5 style="font-weight: 400;font-size: 12px">Destination</h5>
+                <h6 style="font-weight: bold;font-size: 14px">{{destination}}</h6>
+              </div>
+              <div class="col-lg-3">
+                <h5 style="font-weight: 400;font-size: 12px">Target In Kg</h5>
+                <h6 style="font-weight: bold;font-size: 14px">{{targetInKg}}</h6>
+              </div>
+              <div class="col-lg-3">
+                <h5 style="font-weight: 400;font-size: 12px">User Id</h5>
+                <h6 style="font-weight: bold;font-size: 14px">{{userId}}</h6>
+              </div>
+              <div class="col-lg-3">
+                <h5 style="font-weight: 400;font-size: 12px">Total Incentive</h5>
+                <h6 style="font-weight: bold;font-size: 14px">{{totalIncentive}}</h6>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 50px">
+                <div class="col-lg-8" style="border: solid 1px lightgray">
+                    <h5 style="font-weight: bold;">Incentive Statistics</h5>
+                    <br>
+                    <table class="table" #table_1>
+                        <thead>
+                        <tr>
+                            <th>Balance</th>
+                            <th>Achieve Kg</th>
+                            <th>Incentive Amount</th>
+                            <th>Incentive</th>
+                            <th>Total Amount</th>
+                            <th>Total Kg</th>
+                            <th>Transfer</th>
+                            <th style="width: 9%;">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of incentiveList; let i = index">
+                            <td>{{item.balance}}</td>
+                            <td>{{item.achieveKg}}</td>
+                            <td>{{item.incentiveAmount}}</td>
+                            <td>{{item.incentive}}</td>
+                            <td>{{item.totalAmount}}</td>
+                            <td>{{item.totalKg}} KG</td>
+                            <td>{{item.transfer !== undefined ? item.transfer : '0'}}</td>
+                            <td><button *ngIf="item.balance !== 0" class="btn btn-success btn-sm" data-toggle="modal" data-target="#confirmModal" (click)="check(item._id, item.balance)"><i class="fa fa-check"></i></button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div>
+                <div class="col-lg-4" style="border: solid 1px lightgray">
+                    <h5 style="font-weight: bold;">Transaction</h5>
+                    <br>
+                    <table class="table" #table_2>
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of incentiveTrasactionList; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{item.amount}}</td>
+                            <td>{{item.createdAt | date: 'dd-MM-yyyy'}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="closeModelBtn" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="modal bd-example-modal-lg fade" id="confirmModal" tabindex="-1" role="dialog"
+      aria-labelledby="confirmModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document" style="width: 400px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <h4><b>Do you want to clear balance.</b></h4>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="updateIncentive()" data-dismiss="modal">Yes</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box box-solid">
+      <div class="box-body">
+        <div class="table-responsive">
+          <table class="table" id="employeesTable" #table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Mobile No</th>
+                <th>Email ID</th>
+                <th>Area of Expertise</th>
+                <th>Designation</th>
+                <th>Target</th>
+                <th>Login Id</th>
+                <th>Incentive</th>
+                <th style="width: 9%;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of dataList; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{item.name}}</td>
+                <td>{{item.mobileNo}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.areaOfExpertise}}</td>
+                <td>{{item._destination}}</td>
+                <td>{{item.data.targetInKg}} KG</td>
+                <td>{{item.userId}}</td>
+                <td>{{item.totalIncentive}}</td>
+                <td>
+                  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"
+                    (click)="viewEmp(item._id, item.name, item.mobileNo, item.email, item.areaOfExpertise, item._destination, item.data.targetInKg, item.userId, item.totalIncentive)">
+                    <i class="fa fa-eye"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
